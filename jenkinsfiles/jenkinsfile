@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    environment {
+        JMETER_HOME = "/opt/apache-jmeter-5.5" // Update with your JMeter installation path
+        TEST_PLAN = "test-plans/sample-test.jmx" // Path to your JMeter test plan
+    }
+
+    stages {
+        stage('Run JMeter Test') {
+            steps {
+                script {
+                    echo "Running JMeter test: ${TEST_PLAN}"
+                    sh '''
+                    $JMETER_HOME/bin/jmeter -n \
+                        -t ${TEST_PLAN} \
+                        -l results/results.jtl
+                    '''
+                    echo "JMeter test completed. Check the logs above for details."
+                }
+            }
+        }
+    }
+}
