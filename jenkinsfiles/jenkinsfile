@@ -1,5 +1,7 @@
 pipeline {
-    agent "testNode"
+    agent {
+		label "testNode"
+	}
 
     environment {
         JMETER_HOME = "/opt/jmeter/apache-jmeter-5.6.3" // Update with your JMeter installation path
